@@ -18,17 +18,17 @@ func CreateQRCode() echo.HandlerFunc {
 		if err := c.Bind(qrCode); err != nil {
 			return err
 		}
-		png, err := GenerateQRCode(qrCode.Content)
+		base64Image, err := GenerateQRCode(qrCode.Content)
 		if err != nil {
 			return err
 		}
-		return c.JSON(http.StatusOK, png)
+		return c.JSON(http.StatusOK, base64Image)
 	}
 }
 
 func GenerateQRCode(content string) (string, error) {
 	var base64Image string
-	code, err := qrcode.Encode(content, qrcode.Medium, 256)
+	code, err := qrcode.Encode(content, qrcode.Medium, 2048)
 	if err != nil {
 		return "", err
 	}
