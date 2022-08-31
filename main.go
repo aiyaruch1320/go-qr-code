@@ -10,6 +10,7 @@ import (
 
 	qrcode "github.com/aiyaruch1320/go-qr-code/qr-code"
 	"github.com/labstack/echo/v4"
+	"github.com/labstack/echo/v4/middleware"
 )
 
 func main() {
@@ -17,6 +18,14 @@ func main() {
 	defer cancel()
 
 	e := echo.New()
+
+	corsConfig := middleware.CORSConfig{
+		AllowHeaders:     []string{"*"},
+		AllowCredentials: true,
+		AllowOrigins:     []string{"*"},
+		AllowMethods:     []string{http.MethodGet, http.MethodHead, http.MethodPut, http.MethodPatch, http.MethodPost, http.MethodDelete},
+	}
+	e.Use(middleware.CORSWithConfig(corsConfig))
 	e.GET("/health", func(c echo.Context) error {
 		return c.String(http.StatusOK, "OK")
 	})
