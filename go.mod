@@ -3,6 +3,7 @@ module github.com/aiyaruch1320/go-qr-code
 go 1.19
 
 require (
+	github.com/divan/qrlogo v1.0.2
 	github.com/labstack/echo/v4 v4.8.0
 	github.com/skip2/go-qrcode v0.0.0-20200617195104-da1b6568686e
 )
